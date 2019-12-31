@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+    - src_dir: src
+    - work_dir: work
+
+  tasks:   # パスワードでログインできるようにする
+   - name: copy sshd_config.custom
+     copy: src=sshd_config.custom dest=/etc/ssh/sshd_config backup=yes
+
+   - name: restart sshd
+     service: name=sshd state=restarted
+  handlers:

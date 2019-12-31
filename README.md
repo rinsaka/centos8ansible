@@ -1,5 +1,5 @@
 # What's This?
-- インストールされた直後のCentOS 7 (centos7vagrantfile) に，Python, PHP, Laravel, MySQL-Mroonga, Mecab などを自動的にインストールすることができます．
+- インストールされた直後のCentOS 8 (centos7vagrantfile) に，Python, PHP, Laravel, MySQL-Mroonga, Mecab などを自動的にインストールすることができます．
 
 # 設定方法
 

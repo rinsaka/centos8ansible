@@ -7,31 +7,59 @@
 
   tasks:
     - name: install remi repository
-      command: rpm -Uvh --force http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+      command: rpm -Uvh --force http://rpms.famillecollet.com/enterprise/remi-release-8.rpm
+
+    ## php73 で動作可能になる
 
     - name: install php
-      yum: name={{item}} enablerepo=remi,remi-php71,mysql57-community disablerepo=mysql56-community state=present
-      with_items:
-        - php
-        - php-common
-        - php-pdo
-        - php-cli
-        - php-devel
-        - php-mbstring
-        - php-gd
-        - php-intl
-        - php-xml
-        - php-mcrypt
-        - php-mysql
-        - php-ldap
-        - php-pecl-xdebug
-        - php-gmp
-      notify:
-        - restart httpd
+      dnf: name=php73 enablerepo=remi disablerepo=remi-safe state=latest
 
-    - name: copy php.ini.custom
-      copy: src=php.ini.custom dest=/etc/php.ini backup=yes
-      notify:
-        - restart httpd
+    ## php コマンドで実行できるようにするための処理
+    - name: update-alternatives
+      command: update-alternatives --install /usr/bin/php php /usr/bin/php73 1
+
+    - name: install php-common
+      dnf: name=php73-php-common enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php-pdo
+      dnf: name=php73-php-pdo enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php-cli
+      dnf: name=php73-php-cli enablerepo=remi disablerepo=remi-safe state=latest
+
+
+    - name: install php-mbstring
+      dnf: name=php73-php-mbstring enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php-gd
+      dnf: name=php73-php-gd enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php-intl
+      dnf: name=php73-php-intl enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php-xml
+      dnf: name=php73-php-xml enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php73-php-pecl-mcrypt
+      dnf: name=php73-php-pecl-mcrypt enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php-mysqlnd
+      dnf: name=php73-php-mysqlnd enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php-ldap
+      dnf: name=php73-php-ldap enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php-pecl-xdebug
+      dnf: name=php73-php-pecl-xdebug enablerepo=remi disablerepo=remi-safe state=latest
+
+    - name: install php-gmp
+      dnf: name=php73-php-gmp enablerepo=remi disablerepo=remi-safe state=latest
+
+    # - name: install php-devel
+    #   dnf: name=php73-php-devel enablerepo=remi disablerepo=remi-safe state=latest
+
+
+    - name: restart httpd
+      service: name=httpd state=restarted
 
   handlers:

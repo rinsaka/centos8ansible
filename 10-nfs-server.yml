@@ -6,8 +6,10 @@
     - work_dir: work
 
   tasks:
-    - name: install nfs-utils 
-      yum: name=nfs-utils state=latest
+    - name: install nfs-utils
+      dnf: name=nfs-utils state=latest
+    - name: install rpcbind
+      dnf: name=rpcbind state=latest
     - name: start rpcbind and enabled
       service: name=rpcbind state=started enabled=yes
     - name: start nfs-server and enabled

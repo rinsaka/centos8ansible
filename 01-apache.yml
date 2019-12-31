@@ -7,7 +7,7 @@
 
   tasks:
     - name: install apache
-      yum: name=httpd state=latest
+      dnf: name=httpd state=latest
     - name: start apache and enabled
       service: name=httpd state=started enabled=yes
     - name: change owner
