@@ -12,51 +12,51 @@
     ## php73 で動作可能になる
 
     - name: install php
-      dnf: name=php73 enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73 enablerepo=remi disablerepo=remi-safe state=present
 
     ## php コマンドで実行できるようにするための処理
     - name: update-alternatives
       command: update-alternatives --install /usr/bin/php php /usr/bin/php73 1
 
     - name: install php-common
-      dnf: name=php73-php-common enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-common enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php-pdo
-      dnf: name=php73-php-pdo enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-pdo enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php-cli
-      dnf: name=php73-php-cli enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-cli enablerepo=remi disablerepo=remi-safe state=present
 
 
     - name: install php-mbstring
-      dnf: name=php73-php-mbstring enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-mbstring enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php-gd
-      dnf: name=php73-php-gd enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-gd enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php-intl
-      dnf: name=php73-php-intl enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-intl enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php-xml
-      dnf: name=php73-php-xml enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-xml enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php73-php-pecl-mcrypt
-      dnf: name=php73-php-pecl-mcrypt enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-pecl-mcrypt enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php-mysqlnd
-      dnf: name=php73-php-mysqlnd enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-mysqlnd enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php-ldap
-      dnf: name=php73-php-ldap enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-ldap enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php-pecl-xdebug
-      dnf: name=php73-php-pecl-xdebug enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-pecl-xdebug enablerepo=remi disablerepo=remi-safe state=present
 
     - name: install php-gmp
-      dnf: name=php73-php-gmp enablerepo=remi disablerepo=remi-safe state=latest
+      dnf: name=php73-php-gmp enablerepo=remi disablerepo=remi-safe state=present
 
     # - name: install php-devel
-    #   dnf: name=php73-php-devel enablerepo=remi disablerepo=remi-safe state=latest
+    #   dnf: name=php73-php-devel enablerepo=remi disablerepo=remi-safe state=present
 
 
     - name: restart httpd

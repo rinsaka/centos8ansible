@@ -21,6 +21,9 @@
     - name: install mysql80-community-mroonga
       dnf: name=mysql80-community-mroonga enablerepo=epel disablerepo=AppStream state=present
 
+    - name: update my.cnf
+      copy: src=my.cnf.custom dest=/etc/my.cnf backup=yes
+
     - name: start mysql and enabled
       service: name=mysqld state=started enabled=yes
 
