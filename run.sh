@@ -11,3 +11,5 @@ ansible-playbook 08-ruby.yml --connection=local
 ansible-playbook 09-python-anaconda.yml --connection=local
 ansible-playbook 10-pdftotext.yml --connection=local
 ansible-playbook 11-siege.yml --connection=local
+ansible-playbook 12-mongo.yml --connection=local
+

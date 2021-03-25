@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+    - src_dir: src
+    - work_dir: work
+
+  tasks:
+    - name: copy mongo.repo
+      copy: src=mongodb-org.repo dest=/etc/yum.repos.d/mongodb-org.repo backup=yes
+    - name: install mongodb-org
+      dnf: name=mongodb-org state=present
+    - name: start mongod 
+      service: name=mongod state=started enabled=yes
+
+  handlers:
