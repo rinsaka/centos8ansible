@@ -8,6 +8,10 @@
     - name: Disabled SELinux
       selinux:
         state: disabled
+    - name: remove firewall
+      dnf:
+        name: firewalld
+        state: absent
     - name: remove localtime
       file: path=/etc/localtime state=absent
     - name: change timezone
