@@ -29,4 +29,6 @@
       dnf: name=gcc-c++ state=latest
     - name: install unzip   # laravel のプロジェクト生成に必要
       dnf: name=unzip state=latest
+    - name: langpacks-ja # 日本語表示に必要
+      dnf: name=langpacks-ja state=latest
   handlers:
