@@ -9,57 +9,34 @@
     - name: install remi repository
       command: rpm -Uvh --force http://rpms.famillecollet.com/enterprise/remi-release-8.rpm
 
-    ## php73 で動作可能になる
-
     - name: install php
-      dnf: name=php73 enablerepo=remi disablerepo=remi-safe state=present
+      dnf:
+        name: "{{ packages }}"
+        state: present
+        enablerepo: remi
+        disablerepo: remi-safe
+      vars:
+        packages:
+        - php80 
+        - php80-php-common
+        - php80-php-pdo
+        - php80-php-cli
+        - php80-php-mbstring
+        - php80-php-gd
+        - php80-php-intl
+        - php80-php-xml
+        - php80-php-pecl-mcrypt
+        - php80-php-mysqlnd
+        - php80-php-ldap
+        - php80-php-pecl-xdebug3
+        - php80-php-gmp
+        - php80-php-devel
 
-    ## php コマンドで実行できるようにするための処理
     - name: update-alternatives
-      command: update-alternatives --install /usr/bin/php php /usr/bin/php73 1
-
-    - name: install php-common
-      dnf: name=php73-php-common enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php-pdo
-      dnf: name=php73-php-pdo enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php-cli
-      dnf: name=php73-php-cli enablerepo=remi disablerepo=remi-safe state=present
-
-
-    - name: install php-mbstring
-      dnf: name=php73-php-mbstring enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php-gd
-      dnf: name=php73-php-gd enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php-intl
-      dnf: name=php73-php-intl enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php-xml
-      dnf: name=php73-php-xml enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php73-php-pecl-mcrypt
-      dnf: name=php73-php-pecl-mcrypt enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php-mysqlnd
-      dnf: name=php73-php-mysqlnd enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php-ldap
-      dnf: name=php73-php-ldap enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php-pecl-xdebug
-      dnf: name=php73-php-pecl-xdebug enablerepo=remi disablerepo=remi-safe state=present
-
-    - name: install php-gmp
-      dnf: name=php73-php-gmp enablerepo=remi disablerepo=remi-safe state=present
-
-    # - name: install php-devel
-    #   dnf: name=php73-php-devel enablerepo=remi disablerepo=remi-safe state=present
-
+      command: update-alternatives --install /usr/bin/php php /usr/bin/php80 1
 
     - name: restart httpd
       service: name=httpd state=restarted
 
   handlers:
+
