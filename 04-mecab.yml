@@ -13,45 +13,49 @@
   tasks:
     #### Install Mecab
     - name: download mecab.tar.gz
-      get_url: url={{mecab_url}} dest={{work_dir}}
+      get_url: url={{mecab_url}} dest=/tmp
       become: no
     - name: unarchive mecab.tar.gz
-      command: chdir={{work_dir}} tar xvzf {{mecab_ver}}.tar.gz
+      unarchive:
+        src: "/tmp/{{ mecab_ver }}.tar.gz"
+        dest: "/tmp"
       become: no
     - name: configure mecab
-      command: chdir={{work_dir}}/{{mecab_ver}} ./configure
+      command: chdir="/tmp/{{ mecab_ver }}" ./configure
       become: no
     - name: make mecab
-      command: chdir={{work_dir}}/{{mecab_ver}} make
+      command: chdir="/tmp/{{ mecab_ver }}" make
       become: no
     - name: make install mecab
-      command: chdir={{work_dir}}/{{mecab_ver}} make install
+      command: chdir="/tmp/{{ mecab_ver }}" make install
       become: yes
     - name: delete mecab source dir
-      file: path={{work_dir}}/{{mecab_ver}} state=absent
+      file: path="/tmp/{{ mecab_ver }}" state=absent
     - name: delete mecab source file
-      file: path={{work_dir}}/{{mecab_ver}}.tar.gz state=absent
+      file: path="/tmp/{{ mecab_ver }}.tar.gz" state=absent
 
     #### Install mecab-ipadic
     - name: download ipadic.tar.gz
-      get_url: url={{ipadic_url}} dest={{work_dir}}
+      get_url: url={{ipadic_url}} dest=/tmp
       become: no
     - name: unarchive ipadic.tar.gz
-      command: chdir={{work_dir}} tar xvzf {{ipadic_ver}}.tar.gz
+      unarchive:
+        src: "/tmp/{{ ipadic_ver }}.tar.gz"
+        dest: "/tmp"
       become: no
     - name: configure ipadic
-      command: chdir={{work_dir}}/{{ipadic_ver}} ./configure --with-charset=utf8
+      command: chdir="/tmp/{{ ipadic_ver }}" ./configure --with-charset=utf8
       become: no
     - name: make ipadic
-      command: chdir={{work_dir}}/{{ipadic_ver}} make
+      command: chdir="/tmp/{{ ipadic_ver }}" make
       become: no
     - name: make install ipadic
-      command: chdir={{work_dir}}/{{ipadic_ver}} make install
+      command: chdir="/tmp/{{ ipadic_ver }}" make install
       become: yes
     - name: delete ipadic source dir
-      file: path={{work_dir}}/{{ipadic_ver}} state=absent
+      file: path="/tmp/{{ ipadic_ver }}" state=absent
     - name: delete ipadic source file
-      file: path={{work_dir}}/{{ipadic_ver}}.tar.gz state=absent
+      file: path="/tmp/{{ ipadic_ver }}.tar.gz" state=absent
 
     #### Install mecab-ipadic-neologd
     - name: download mecab-ipadic-neologd
