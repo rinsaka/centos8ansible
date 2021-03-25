@@ -23,6 +23,8 @@
       dnf: name=man state=latest
     - name: install patch   # mecab-ipadic-neologd のインストールに必要
       dnf: name=patch state=latest
+    - name: install gcc
+      dnf: name=gcc state=latest
     - name: install gcc-c++
       dnf: name=gcc-c++ state=latest
     - name: install unzip   # laravel のプロジェクト生成に必要
