@@ -6,7 +6,8 @@
     - work_dir: work
 
   tasks:
-    - dnf:
+    - name: install mariadb
+      dnf:
         name: "{{ packages }}"
         state: present
       vars:
