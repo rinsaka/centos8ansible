@@ -10,4 +10,4 @@ ansible-playbook 07-laravel.yml --connection=local
 ansible-playbook 08-ruby.yml --connection=local
 ansible-playbook 09-python-anaconda.yml --connection=local
 ansible-playbook 10-pdftotext.yml --connection=local
-# ansible-playbook 10-nfs-server.yml --connection=local
+ansible-playbook 11-siege.yml --connection=local

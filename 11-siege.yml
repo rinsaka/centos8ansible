@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+    - src_dir: src
+    - work_dir: work
+
+  tasks:
+    - name: install siege 
+      dnf:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+        - siege
+
+
+  handlers:
