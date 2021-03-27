@@ -1,0 +1,57 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+    - src_dir: src
+    - work_dir: work
+
+  tasks:
+    - name: install arrow gpg-key
+      rpm_key:
+        state: present
+        key: https://apache.bintray.com/arrow/centos/RPM-GPG-KEY-apache-arrow
+    - name: install groonga gpg-key
+      rpm_key:
+        state: present
+        key: https://packages.groonga.org/centos/RPM-GPG-KEY-groonga 
+    - name: install groonga gpg-key
+      rpm_key:
+        state: present
+        key: https://packages.groonga.org/centos/RPM-GPG-KEY-34839225 
+    - name: install groonga gpg-key
+      rpm_key:
+        state: present
+        key: https://packages.groonga.org/centos/RPM-GPG-KEY-45499429 
+    - name: install apache-arrow
+      dnf: name=https://apache.bintray.com/arrow/centos/8/apache-arrow-release-latest.rpm state=present
+    - name: Enable PowerTools
+      shell:
+        cmd: dnf config-manager --set-enabled powertools
+    - name: install arrow
+      dnf:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+        - arrow-devel
+        - arrow-glib-devel
+        - arrow-dataset-devel
+
+    - name: install groonga-release
+      dnf: name=https://packages.groonga.org/centos/groonga-release-latest.noarch.rpm state=present
+
+    - name: instal boost-program-options
+      dnf: name=boost-program-options state=present
+
+    - name: install mariadb 
+      shell:
+        cmd: dnf install -y --disablerepo=appstream MariaDB-server-10.4.17-1.el8 MariaDB-client-10.4.17-1.el8 MariaDB-common-10.4.17-1.el8 MariaDB-shared-10.4.17-1.el8
+
+    - name: start mariadb and enabled
+      service: name=mariadb state=started enabled=yes
+
+    - name: install mariadb-mroonga
+      shell:
+        cmd: dnf install -y --enablerepo=epel mariadb-10.4-mroonga
+
+  handlers:
