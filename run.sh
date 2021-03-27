@@ -4,7 +4,11 @@ ansible-playbook main.yml --connection=local
 #ansible-playbook 00-sshd.yml --connection=local
 ansible-playbook 01-apache.yml --connection=local
 ansible-playbook 04-mecab.yml --connection=local
-ansible-playbook 05-mariadb.yml --connection=local
+
+# どちらか一方を有効にする（mroongaは日本語全文検索可能） 
+#ansible-playbook 05-mariadb.yml --connection=local
+ansible-playbook 05-mariadb-mroonga.yml --connection=local
+
 ansible-playbook 06-php.yml --connection=local
 ansible-playbook 07-laravel.yml --connection=local
 ansible-playbook 08-ruby.yml --connection=local
